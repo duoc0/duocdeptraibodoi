@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chuyển Trang Luân Phiên</title>
+  <script>
+    // Đường dẫn tới 2 file html cục bộ
+    const url1 = "web1.html";
+    const url2 = "web2.html";
+
+    // Lấy trạng thái trước đó từ localStorage
+    const last = localStorage.getItem("lastVisited");
+
+    // Nếu lần trước là web1 thì lần này là web2, và ngược lại
+    const next = (last === "1") ? "2" : "1";
+    const nextUrl = (next === "1") ? url1 : url2;
+
+    // Lưu lại trạng thái để dùng cho lần kế tiếp
+    localStorage.setItem("lastVisited", next);
+
+    // Chuyển hướng ngay lập tức
+    window.location.href = nextUrl;
+  </script>
+</head>
+<body>
+</body>
+</html>
