@@ -5,25 +5,30 @@
   <title>Chuyển Trang Luân Phiên</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="apple-touch-icon" href="icon.png"> <!-- Thay icon.png bằng icon của bạn -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const url1 = "web1.html";
-      const url2 = "web2.html";
-
-      const last = localStorage.getItem("lastVisited");
-      const next = (last === "1") ? "2" : "1";
-      const nextUrl = (next === "1") ? url1 : url2;
-
-      localStorage.setItem("lastVisited", next);
-
-      // Bắt buộc chuyển hướng sau một chút delay (iOS cần vậy)
+    window.onload = function () {
       setTimeout(function () {
-        window.location.href = nextUrl;
-      }, 100); // delay 100ms cho iOS ổn định hơn
-    });
+        try {
+          const url1 = "web1.html";
+          const url2 = "web2.html";
+
+          let last = localStorage.getItem("lastVisited");
+          let next = (last === "1") ? "2" : "1";
+          let nextUrl = (next === "1") ? url1 : url2;
+
+          localStorage.setItem("lastVisited", next);
+          window.location.href = nextUrl;
+        } catch (e) {
+          document.body.innerHTML = "<p>Lỗi khi chuyển trang. Kiểm tra Safari & localStorage.</p>";
+        }
+      }, 300); // iOS Web App cần delay mới redirect được
+    };
   </script>
 </head>
 <body>
