@@ -5,6 +5,9 @@
   <title>Chuyển Trang Luân Phiên</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="apple-touch-icon" href="icon.png"> <!-- Thay icon.png bằng icon của bạn -->
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const url1 = "web1.html";
@@ -15,9 +18,15 @@
       const nextUrl = (next === "1") ? url1 : url2;
 
       localStorage.setItem("lastVisited", next);
+
+      // Bắt buộc chuyển hướng sau một chút delay (iOS cần vậy)
+      setTimeout(function () {
+        window.location.href = nextUrl;
+      }, 100); // delay 100ms cho iOS ổn định hơn
     });
   </script>
 </head>
 <body>
+  <p>Đang chuyển trang...</p>
 </body>
 </html>
